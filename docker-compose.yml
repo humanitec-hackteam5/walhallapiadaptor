@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  walhallapiadaptor:
+    build: .
+
+    expose:
+      - "8080"
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      WALHALL_API_PREFIX: https://api.walhall.io/
+      WALHALL_REGISTRY: registry.walhall.io
