@@ -18,7 +18,8 @@ import (
 // $ mockgen -source=../../internal/walhallapi/types.go -destination=walhallapier_mock.go -package=main WalhallAPIer
 
 type mocks struct {
-	walhall walhallapi.WalhallAPIer
+	walhall  walhallapi.WalhallAPIer
+	registry string
 }
 
 func ExecuteRequest(mocks mocks, method, url string, body io.Reader, t *testing.T) *httptest.ResponseRecorder {
@@ -26,6 +27,7 @@ func ExecuteRequest(mocks mocks, method, url string, body io.Reader, t *testing.
 		newWalhall: func(jwt string) (walhallapi.WalhallAPIer, error) {
 			return mocks.walhall, nil
 		},
+		registryName: mocks.registry,
 	}
 	server.setupRoutes()
 
@@ -194,7 +196,7 @@ func TestListModules(t *testing.T) {
 		}, nil).
 		Times(1)
 
-	resp := ExecuteRequest(mocks{walhall: m}, http.MethodGet, "/orgs/org-one/modules", nil, t)
+	resp := ExecuteRequest(mocks{walhall: m, registry: "registry.walhall.io"}, http.MethodGet, "/orgs/org-one/modules", nil, t)
 
 	var actual []Module
 	json.Unmarshal(resp.Body.Bytes(), &actual)
