@@ -43,9 +43,7 @@ func (a *APIState) ListOrgs() (map[string]string, error) {
 
 	orgs := make(map[string]string)
 	for _, org := range userDetail.Orgs {
-		if org.Name != a.claims.Username {
-			orgs[org.Name] = org.UUID
-		}
+		orgs[org.Name] = org.UUID
 	}
 	a.cache[cacheKey] = orgs
 	return orgs, nil
