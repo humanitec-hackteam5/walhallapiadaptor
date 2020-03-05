@@ -10,7 +10,7 @@ import (
 )
 
 type Module struct {
-	Name   string        `json:"name"`
+	ID     string        `json:"id"`
 	Source string        `json:"source"`
 	Builds []ModuleBuild `json:"builds"`
 }
@@ -82,7 +82,7 @@ func (s *server) listModules() func(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 			modules[iM] = Module{
-				Name:   module.Name,
+				ID:     module.Name,
 				Source: "Github",
 				Builds: builds,
 			}

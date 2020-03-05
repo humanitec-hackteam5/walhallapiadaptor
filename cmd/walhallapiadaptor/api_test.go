@@ -115,7 +115,7 @@ func TestListModules(t *testing.T) {
 
 	expectedModules := []Module{
 		Module{
-			Name:   "test-module-one",
+			ID:     "test-module-one",
 			Source: "Github",
 			Builds: []ModuleBuild{
 				ModuleBuild{
@@ -133,7 +133,7 @@ func TestListModules(t *testing.T) {
 			},
 		},
 		Module{
-			Name:   "test-module-two",
+			ID:     "test-module-two",
 			Source: "Github",
 			Builds: []ModuleBuild{
 				ModuleBuild{
